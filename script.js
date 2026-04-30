@@ -4,6 +4,7 @@ const addBtn = document.getElementById('addBtn');
 const todoList = document.getElementById('todoList');
 const totalTodos = document.getElementById('totalTodos');
 const completedTodos = document.getElementById('completedTodos');
+const clearBtn = document.getElementById('clearBtn');
 
 // Load todos from localStorage on page load
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -13,6 +14,7 @@ renderTodos();
 
 // Event listeners
 addBtn.addEventListener('click', addTodo);
+clearBtn.addEventListener('click', clearCompleted);
 todoInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addTodo();
@@ -105,4 +107,17 @@ function updateStats() {
 
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function clearCompleted() {
+    const completedCount = todos.filter(todo => todo.completed).length;
+    
+    if (completedCount === 0) {
+        alert('No completed tasks to clear!');
+        return;
+    }
+    
+    todos = todos.filter(todo => !todo.completed);
+    saveTodos();
+    renderTodos();
 }
