@@ -42,9 +42,15 @@ function addTodo() {
 }
 
 function deleteTodo(id) {
-    todos = todos.filter(todo => todo.id !== id);
-    saveTodos();
-    renderTodos();
+    const todoItem = document.querySelector(`[data-id="${id}"]`);
+    if (todoItem) {
+        todoItem.style.animation = 'fadeOut 0.4s ease-out forwards';
+        setTimeout(() => {
+            todos = todos.filter(todo => todo.id !== id);
+            saveTodos();
+            renderTodos();
+        }, 400);
+    }
 }
 
 function toggleTodo(id) {
@@ -62,6 +68,7 @@ function renderTodos() {
     todos.forEach(todo => {
         const li = document.createElement('li');
         li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+        li.setAttribute('data-id', todo.id);
         
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
