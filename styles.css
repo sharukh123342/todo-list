@@ -19,10 +19,12 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3), 0 0 20px rgba(240, 147, 251, 0.2);
     z-index: 1000;
     animation: slideDown 0.5s ease-out;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .nav-content {
@@ -37,22 +39,38 @@ body {
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
     animation: fadeIn 0.6s ease-out 0.2s both;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand:hover {
+    transform: scale(1.05);
 }
 
 .nav-icon {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
     color: white;
+    animation: bounce 0.6s ease-out 0.2s both;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nav-brand h2 {
     color: white;
-    font-size: 24px;
+    font-size: 26px;
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .nav-menu {
@@ -64,28 +82,47 @@ body {
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
     position: relative;
     animation: fadeIn 0.6s ease-out 0.3s both;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background-color: white;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd89b, #ff9999, #ffa5de);
     transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
 .nav-link:hover {
     color: white;
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
 }
 
 .nav-link:hover::after {
@@ -94,6 +131,8 @@ body {
 
 .nav-link.active {
     color: white;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link.active::after {
@@ -101,23 +140,24 @@ body {
 }
 
 .nav-btn {
-    padding: 10px 20px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #ffd89b 0%, #ff9999 50%, #ffa5de 100%);
+    color: #2d2d2d;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     animation: fadeIn 0.6s ease-out 0.4s both;
+    box-shadow: 0 6px 20px rgba(255, 165, 222, 0.4);
+    letter-spacing: 0.5px;
 }
 
 .nav-btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 165, 222, 0.6);
+    filter: brightness(1.1);
 }
 
 .nav-btn:active {
@@ -355,6 +395,15 @@ h1 {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
     }
 }
 
